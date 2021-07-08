@@ -135,7 +135,7 @@ const Chart = () => {
   return (
     <div>
       <div>
-        <p>Click zie buttons to get a new pretty chart!</p>
+      <h3 class="h3 text-align-center text-black pt-5 mt-5 pt-lg-0 mt-lg-0 mb-4 pb-lg-2 mx-0 mx-lg-5 px-0 px-lg-5">How does your organization stack up?</h3>
         <Plot
           data={[
             {
