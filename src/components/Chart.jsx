@@ -79,7 +79,7 @@ const Chart = () => {
   return (
     <div>
       <div>
-        <p>Chart will go here</p>
+        <p>Click zie buttons to get a new pretty chart!</p>
         <Plot
           data={[
             {
