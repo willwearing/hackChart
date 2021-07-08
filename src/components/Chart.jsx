@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Plot from "react-plotly.js";
 import styled from 'styled-components';
+import * as d3 from "d3";
 
 const StyledDiv = styled.div`
     display: flex;
@@ -14,7 +15,7 @@ const options = [
       value: {
           x: [1,2,3,4],
           y: [15, 23, 53, 65]
-      },
+    },
     },
     {
       label: "Mango",
@@ -109,15 +110,25 @@ const Chart = () => {
       });
   };
   
+  const fetchCSV = () => {
+    const url = `https://docs.google.com/spreadsheets/d/e/2PACX-1vRlrdOqpJ2toL1UdQj9_vKA0ZeYwBF8htl0-bm8avUHOzCkHNyZeu1R7TAoCDxAEOiAzC0701yZjhHx/pub?gid=485832125&single=true&output=csv`;
+    d3.csv(url)
+    .then((data) => {
+        console.log(data)
+        data.map((individualRow) => {
+            console.log("Rows here", individualRow)
+        })
+    })
+  }
+
   const onChange = (e) => {
-      let a = e.target.value
+      let a = e.target.value  
       let xAndY = JSON.parse(a)
       let index = e.nativeEvent.target.selectedIndex;
       let label = e.nativeEvent.target[index].text;
       console.log(xAndY?.x)
       setXValue(xAndY?.x)
       setYValue(xAndY?.y)
-
       setSelectedValue(e.target.value)
   }
 
@@ -148,6 +159,7 @@ const Chart = () => {
               <option key={option.name} value={JSON.stringify(option.value)}>{option.label}</option>
             ))}
           </select>
+          <button onClick={fetchCSV}>CSV</button>
         </div>
       </StyledDiv>
     </div>
