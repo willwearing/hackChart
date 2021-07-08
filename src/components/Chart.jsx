@@ -8,13 +8,46 @@ const StyledDiv = styled.div`
     justify-content: space-around;
 `
 
+const options = [
+    {
+      label: "Apple",
+      value: {
+          x: [1,2,3,4],
+          y: [15, 23, 53, 65]
+      },
+    },
+    {
+      label: "Mango",
+      value: {
+        x: [12,23,34,45],
+        y: [153, 234, 536, 653]
+    },
+    },
+    {
+      label: "Banana",
+      value: {
+        x: [5,3,7,3],
+        y: [15, 22, 57, 61]
+    },
+    },
+    {
+      label: "Pineapple",
+      value: {
+        x: [1,2,3,4],
+        y: [15, 23, 53, 65]
+    },
+    },
+  ];
+
 const Chart = () => {
 
   const [xValue, setXValue] = useState([10, 20, 30, 40, 160, 170, 260]);
   const [yValue, setYValue] = useState([10, 400, 90, 600, 40, 200, 100]);
+  const [selectedValue, setSelectedValue] = useState(options[0].label)
 
   let xAxisValue = [];
   let yAxisValue = [];
+  
 
   const fetchPricing = () => {
     axios
@@ -75,6 +108,18 @@ const Chart = () => {
         console.log("get fake beer data err:", err);
       });
   };
+  
+  const onChange = (e) => {
+      let a = e.target.value
+      let xAndY = JSON.parse(a)
+      let index = e.nativeEvent.target.selectedIndex;
+      let label = e.nativeEvent.target[index].text;
+      console.log(xAndY?.x)
+      setXValue(xAndY?.x)
+      setYValue(xAndY?.y)
+
+      setSelectedValue(e.target.value)
+  }
 
   return (
     <div>
@@ -97,6 +142,13 @@ const Chart = () => {
         <button onClick={fetchPricing}>Fetch Pricing</button>
         <button onClick={fetchBeer}>Fetch Beer</button>
         <button onClick={fetchNumber}>Fetch Number</button>
+        <div className="select-container">
+          <select value={selectedValue} onChange={onChange}>
+            {options.map((option) => (
+              <option key={option.name} value={JSON.stringify(option.value)}>{option.label}</option>
+            ))}
+          </select>
+        </div>
       </StyledDiv>
     </div>
   );
