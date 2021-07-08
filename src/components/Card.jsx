@@ -7,7 +7,7 @@ const Card = (props) => {
           <div className="featured-item-card h-100 overflow-hidden position-relative d-flex flex-column">
             <div className="featured-item-card-hover-wrapper position-absolute w-100 h-100">
               <div className="featured-item-card-hover position-absolute w-100 h-100 flex-row align-items-center justify-content-center text-center">
-              <img src={props.image} class="h-100 w-100 featured-item-card-hover-background position-absolute"></img>
+              <img src={props.image} class="featured-item-card-hover-background position-absolute" width="450" height="290"></img>
                 <div className="featured-item-card-hover-content d-flex flex-column justify-content-end align-items-start
                     text-align-left position-relative featured-item-card-content h-100 w-100 p-4">
                   <div className="featured-item-card-title text-white">
